@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
+@keyframes pageLoad {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -27,14 +34,15 @@ body {
     )
     rgb(var(--background-start-rgb));
 
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  @apply font-thin;
 
-    height: 100%;
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    @apply font-thin
+  animation: pageLoad 2s ease;
 }
 
-html{
-  height:100%;
+html {
+  height: 100%;
 }

@@ -4,14 +4,15 @@ import { db } from "@/my-firebase-admin/firebase";
 
 export async function GET() {
   const storiesRef = db!.collection("stories");
+
+  const output: Record<string, any> = {};
+  console.log("hi")
   const snapshot = await storiesRef.get();
-  snapshot.forEach((doc:any) => {
-    console.log(doc.id, "=>", doc.data());
+  snapshot.forEach((doc: any) => {
+    
+    output[doc.id] = doc.data();
+    output[doc.id].id = doc.id;
   });
 
-  const test = {
-    name: "mmatia",
-  };
-
-  return NextResponse.json(test);
+  return NextResponse.json(output);
 }
