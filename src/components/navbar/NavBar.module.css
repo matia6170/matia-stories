@@ -1,0 +1,14 @@
+@keyframes navbarDrop{
+    0%{
+      transform: translateY(-100px);
+    }
+    100%{
+      transform: translateY(0px);
+    }
+  }
+  
+  .navbar {
+    background-color: rgba(0, 0, 0, 0);
+    animation: navbarDrop 2s ease;
+    @apply font-normal
+  }
