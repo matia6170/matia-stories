@@ -5,10 +5,22 @@ import KakaoProvider from "next-auth/providers/kakao";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { FirestoreAdapter } from "@auth/firebase-adapter";
 import { db } from "@/my-firebase-admin/firebase";
-
+import ts from "typescript";
 
 export const options: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET as string,
+  callbacks: {
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+
+
+      // Add admin propertiy to the user Session object. 
+      // @ts-ignore
+      session.user.admin = user.admin;
+
+      return session;
+    },
+  },
   // @ts-ignore
   adapter: FirestoreAdapter(db),
 
@@ -18,7 +30,6 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
       profile(profile: GithubProfile): any {
         // use at your own risk
-        const [firstName, lastName] = profile.name!.split(" ");
         return {
           id: profile.id.toString(),
           name: profile.name || profile.login,
@@ -28,11 +39,5 @@ export const options: NextAuthOptions = {
         };
       },
     }),
-    /*  KakaoProvider({
-    clientId: process.env.KAKAO_CLIENT_ID as string,
-    clientSecret: process.env.KAKAO_CLIENT_SECRET as string
-  }), */
- 
   ],
-
 };

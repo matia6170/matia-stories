@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Inconsolata } from "next/font/google";
 import { getServerSession } from "next-auth";
+
 import { options } from "./api/auth/[...nextauth]/options";
 
 const font = Inconsolata({ subsets: ["latin"] });
@@ -17,15 +18,15 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(options)
+  const session = await getServerSession(options);
+  session;
   return (
     <html lang="en">
       <body className={`${font.className} `}>
-        <NavBar  session={session?true:false}/>
+        <NavBar session={session} />
         <main className="flex min-h-screen flex-col items-center justify-between">
-        <div className="container mx-auto px-4">{children}</div>
+          <div className="container mx-auto px-4">{children}</div>
         </main>
-        
       </body>
     </html>
   );

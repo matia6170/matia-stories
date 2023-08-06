@@ -1,0 +1,8 @@
+
+.content{
+    @apply text-3xl
+}
+
+p{
+    @apply text-xl
+}

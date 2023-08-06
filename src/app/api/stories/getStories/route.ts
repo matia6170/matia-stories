@@ -6,7 +6,6 @@ export async function GET() {
   const storiesRef = db!.collection("stories");
 
   const output: Record<string, any> = {};
-  console.log("hi")
   const snapshot = await storiesRef.get();
   snapshot.forEach((doc: any) => {
     
