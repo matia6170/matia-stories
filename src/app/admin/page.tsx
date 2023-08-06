@@ -6,6 +6,7 @@ import Link from "next/link";
 export default async function AdminPage() {
   const session = await getServerSession(options);
 
+  // @ts-ignore
   if (!session?.user?.admin) {
     redirect("/");
   }
