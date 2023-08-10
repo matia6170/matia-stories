@@ -25,6 +25,21 @@
   }
 }
 
+h1{
+  @apply text-3xl
+}
+h2{
+  @apply text-2xl
+}
+h3{
+  @apply text-xl
+}
+p{
+  @apply text-base pb-4
+}
+
+
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -38,7 +53,7 @@ body {
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  @apply font-thin;
+  /* @apply font-thin; */
 
   animation: pageLoad 2s ease;
 }

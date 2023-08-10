@@ -1,8 +1,8 @@
+/* eslint-disable react/no-children-prop */
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
-import { Markup } from "interweave";
-import { renderToStaticMarkup } from "react-dom/server";
-import styles from "./story.module.css"
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default async function Story(props: any) {
   await getServerSession(options);
@@ -13,7 +13,6 @@ export default async function Story(props: any) {
   );
   const data = (await res.json()).data;
 
-//   console.log(data);
 
   return (
     <div>
@@ -24,7 +23,26 @@ export default async function Story(props: any) {
       <br/>
 
 
-      <div className="mx-4" dangerouslySetInnerHTML={{ __html: data.content }}></div>
+      
+      <ReactMarkdown
+        components={{
+          
+          a: ({ node, ...props }) => (
+            <a className="text-blue-500 hover:underline" {...props} />
+          ),
+          table: ({ node, ...props }) => (
+            <table className="table-auto border border-white" {...props} />
+          ),
+          th: ({ node, ...props }) => (
+            <th className="border text-lg border-white" {...props} />
+          ),
+          img: ({ node, ...props }) => <img className="mx-auto" {...props} />,
+         
+        }}
+        children={data.content.replaceAll("\\n", "\n")}
+        remarkPlugins={[remarkGfm]}
+      />
+
 
     </div>
   );

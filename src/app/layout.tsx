@@ -25,7 +25,7 @@ export default async function RootLayout({
       <body className={`${font.className} `}>
         <NavBar session={session} />
         <main className="flex min-h-screen flex-col items-center justify-between">
-          <div className="container mx-auto px-4">{children}</div>
+          <div className="container mx-auto px-4 ">{children}</div>
         </main>
       </body>
     </html>
