@@ -10,15 +10,14 @@ export default async function Stories() {
 
   const data = await res.json();
   const blogArr = Object.values(data);
-  // blogArr.forEach((element: any) => {
-  //   console.log(element);
-  // });
+
 
   return (
     <div>
       <h1 className="text-3xl font-thin">stories</h1>
       <ListView>
         {blogArr.map((blog: any) => {
+          if (blog.id === "main") return;
           return (
             <BlogListItem
               key={blog.id}
